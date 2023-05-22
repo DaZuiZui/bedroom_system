@@ -14,13 +14,13 @@
                     <div class="row">
                         <div class="col-lg-4 mb-5 mb-lg-0">
                             <!-- Theme's logo -->
-                            <a href="index.html">
-                                www.dazuizui.com      
+                            <a href="http://www.gsxy.cn/">
+                                http://www.gsxy.cn/    
                             </a>
                             <!-- Webpixels' mission -->
                             <p class="mt-4 text-sm opacity-8 pr-lg-4">
-                                此项目是我从初中自学编程以来多年来的心血，能够在如此小的年龄找到自己喜爱的东西，我深感荣幸，我相信在代码里会追寻到我的梦想，在代码里会发挥出我的想象力。
-                                1024行代码终有释放我的光芒！
+                                哈尔滨广厦学院（Harbin GuangSha College），是经国家教育部批准的民办全日制本科普通综合类高等学校。
+                                截至2022年2月，学校占地面积45.72万平方米，建筑面积21.76万平方米；学校图书馆拥有纸质图书78万余册，电子图书186万册，电子期刊58万余册；有专任教师409人，在校生7803人；设有6个二级学院，18个本科专业。
                             </p>
                             <!-- Social -->
                             <ul class="nav mt-4">
@@ -47,25 +47,17 @@
                         <div class="col-lg-2 col-6 col-sm-4 ml-lg-auto mb-5 mb-lg-0">
                             <h6 class="heading mb-3">Author</h6>
                             <ul class="list-unstyled">
-                                <li><a href="#"> </a></li>
+                                <li><a href="#">信息学院专业社团</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-2 col-6 col-sm-4 mb-5 mb-lg-0">
                             <h6 class="heading mb-3">About</h6>
                             <ul class="list-unstyled">
-                                <li><a href="#">项目发展的过程</a></li>
-                                <li><a href="#">我的成长经历</a></li>
-                                <li><a href="#">友情链接</a></li>
+                                <li><a href="#">使用指南</a></li>
+ 
                             </ul>
                         </div>
-                        <div class="col-lg-2 col-6 col-sm-4 mb-5 mb-lg-0">
-                            <h6 class="heading mb-3">thank you</h6>
-                            <ul class="list-unstyled">
-                                <li><a href="#">Quick</a></li>
-                                <li><a href="#">哈广厦张义嘉老师</a></li>
-                                <li><a href="#">how2j.cn</a></li>
-                            </ul>
-                        </div>
+                   
                     </div>
                     <hr class="divider divider-fade divider-dark my-4">
                     <div class="row align-items-center justify-content-md-between pb-4">

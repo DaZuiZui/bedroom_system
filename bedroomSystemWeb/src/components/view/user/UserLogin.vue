@@ -24,7 +24,7 @@
                                   <small id="emailHelp" class="form-text text-muted">我们绝对不会泄漏您的身份证. We'll never share your IC with anyone else.</small>
                                 </div>
                                 <div class="form-group">
-                                  <label for="exampleInputPassword1">Password</label>
+                                  <label for="exampleInputPassword1">Password 密码为您身份证后6位</label>
                                   <input type="password" class="form-control" id="exampleInputPassword1" v-model="user.password">
                                   <small id="emailHelp" class="form-text text-muted">我们会保障您的信息安全. We will protect your information security.</small>
                                 </div>

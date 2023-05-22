@@ -16,7 +16,7 @@
             </div>
         </div>
         <a   class="btn btn-block btn-dark text-truncate rounded-0 py-2 d-none d-lg-block" style="z-index: 1000;color:aliceblue" target="_blank">
-            <strong>哈尔滨广厦学院抢床系统  </strong>  我们必须使用您的浏览器Cookie权限
+            <strong>哈尔滨广厦学院床位选择系统  </strong>  我们必须使用您的浏览器Cookie权限
         </a>
 
         <div>
