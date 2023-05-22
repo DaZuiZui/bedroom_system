@@ -1,0 +1,19 @@
+server:
+  port: 4180
+spring:
+  application:
+    name: app-user
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # set @@GLOBAL.sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+    url: jdbc:mysql://127.0.0.1:3306/bedsystem
+    username: root
+    password: admin
+
+  servlet:
+    #文件上传
+    multipart:
+      enabled: true #是否启用http上传处理
+      max-request-size: 500MB #最大请求文件的大小
+      max-file-size: 500MB #设置单个文件最大长度
+      file-size-threshold: 20MB #当文件达到多少时进行磁盘写入
