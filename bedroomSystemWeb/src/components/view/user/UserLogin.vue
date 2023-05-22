@@ -77,10 +77,9 @@ import { Checkbox } from 'element-ui';
             let obj = await synRequestPost("/user/userlogin",this.user);
             console.log(obj == "");
             if(check(obj)){
-                setCookie ("token",obj.jwt);
+                setCookie("token",obj.data);
                 alert("登入成功");
             }
-            
 
             this.switchbutton = false;
         },

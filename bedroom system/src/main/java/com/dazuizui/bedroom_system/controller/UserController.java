@@ -33,4 +33,21 @@ public class UserController {
 
         return userService.userLogin(user);
     }
+
+    /**
+     * 管理员登入
+     * @param user
+     * @return
+     */
+    @ApiOperation("管理员登入")
+    @PostMapping("/admin/userlogin")
+    public String adminlogin(@RequestBody User user){
+        if (user == null){
+            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.IsNull,null, StatusCode.IsNull));
+        }
+
+        return userService.adminLogin(user);
+    }
+
+
 }

@@ -1,6 +1,8 @@
    //è®¾ç½®cookie
-   function setCookie (name, value) {
+   function setCookie(name, value) {
+ 
     if (value) {
+        alert("??");
         var Days = 365
         var exp = new Date()
         exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000)
@@ -80,6 +82,14 @@
             alert(obj.message);
             //跳转首页
             window.location.href="/h";
+            return false;
+        }else if(obj.code == '0x446'){
+            //跳转首页
+            window.location.href="/h/admin/login";
+            return false;
+        }else if(obj.code == '0x447'){
+            //跳转首页
+            alert("账号密码错误");
             return false;
         }
 

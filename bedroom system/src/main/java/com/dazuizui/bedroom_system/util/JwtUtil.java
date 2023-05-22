@@ -28,7 +28,7 @@ public class JwtUtil {
         JwtBuilder builder = Jwts.builder();
         builder.setIssuer("DaZuiZui"); //颁发者
         builder.setIssuedAt(new Date()); //颁发时间
-        builder.setSubject("ZuiOJ-GuangSha-TLMOJ");   //主题
+        builder.setSubject("ZuiOJ-GuangshaBenroom");   //主题
         builder.setExpiration(new Date(System.currentTimeMillis()+3600000*24*7));  //过期时间 设置3600秒
 
         //自定义信息 自定义载荷

@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson2.JSONArray;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 /**
  * 用户接口实现
  */
@@ -36,4 +38,26 @@ public class UserServiceImpl implements UserService {
 
         return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,jwt, StatusCode.OK));
     }
+
+    /**
+     * 管理员登入
+     * @param user
+     * @return
+     */
+    @Override
+    public String adminLogin(User user) {
+        User userInDB = userMapper.adminLogin(user);
+        System.out.println(userInDB);
+        if (userInDB == null){
+            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.PasswordError,null, StatusCode.PasswordError));
+        }
+
+        String jwt = JwtUtil.createJWT(userInDB);
+
+
+        return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,jwt, StatusCode.OK));
+    }
+
+
+
 }
