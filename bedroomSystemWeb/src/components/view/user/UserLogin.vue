@@ -50,6 +50,7 @@
   import Foot from '../../frame/Foot.vue';
   import Top  from '../../frame/Top.vue'
   import {synRequestPost,synRequestGet} from "../../../../static/request"
+import { Checkbox } from 'element-ui';
   export default {
     name: 'HelloWorld',
     components: {
@@ -67,34 +68,24 @@
     },
     mounted(){
     
-},
+    },
 
-methods: {
-    //提交登入
-    async submit(){
-         this.switchbutton = true;
-         var object = await synRequestPost("/user/userlogin",this.user);
-    
-         /*
-          * 登入成功
-          */
-         if(object.code == "0x0001"){
-             alert(object.message);
-             setCookie ("token",object.data.jwt);
-             global.user =  object.data.userinfo;
-             this.$store.dispatch('setUser',object.data.userinfo);
-             //console.log("todo11"+this.$store.state.user);
-             this.$router.push('/cn/question/coding/list');
-         }else if(object.code == "0x0003"){
-             alert("您的密码错误");
-         }else if(object.code == '0x0002'){
-             alert("您的账户不存在");
-         }
+    methods: {
+        //提交登入
+        async submit(){
+            this.switchbutton = true;
+            let obj = await synRequestPost("/user/userlogin",this.user);
+            console.log(obj == "");
+            if(check(obj)){
+                setCookie ("token",obj.jwt);
+                alert("登入成功");
+            }
+            
 
-         this.switchbutton = false;
-     },
+            this.switchbutton = false;
+        },
+    }
 }
-  }
   </script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
