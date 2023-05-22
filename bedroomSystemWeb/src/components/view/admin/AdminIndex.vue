@@ -6,17 +6,10 @@
         
         <!-- Main content -->
         <section>
-            <div class="container">
-                
-                &nbsp;&nbsp;&nbsp;&nbsp;欢迎使用管理员操作面板。在这个面板上，您可以执行各种管理操作，并且我们将记录您的每一步操作。这个面板提供了一个安全的环境，确保您对系统进行管理的同时，也能跟踪您的操作历史。
-                <br>
-                通过管理员操作面板，您可以：
-                <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;用户管理：创建、编辑和删除用户账户，设置用户权限和角色。
-                &nbsp;&nbsp;&nbsp;&nbsp;内容管理：审核、编辑和删除用户提交的内容，确保平台上的信息质量。
-                &nbsp;&nbsp;&nbsp;&nbsp;安全管理：监控系统的安全性，处理安全事件和漏洞，确保系统的稳定和安全运行。
-                我们重视您的隐私和数据安全，并且会按照适用的隐私法律和政策来处理您的数据。
-            </div>
+            <div class="text-center" style="1000px" >
+                <div class="row mb-5 justify-content-center text-center" >
+                    asd 
+            </div></div>
         </section>
  
         <footer class="position-relative" id="footer-main">
@@ -57,6 +50,13 @@ import { Checkbox } from 'element-ui';
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
+  .activeClass1 {
+	background-color: green;
+}
+.activeClass2 {
+	background-color: skyblue;
+}
+
   h1, h2 {
     font-weight: normal;
   }
