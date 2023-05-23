@@ -50,13 +50,7 @@ import { Checkbox } from 'element-ui';
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
-  .activeClass1 {
-	background-color: green;
-}
-.activeClass2 {
-	background-color: skyblue;
-}
-
+ 
   h1, h2 {
     font-weight: normal;
   }
