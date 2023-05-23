@@ -8,7 +8,7 @@
             bed
         values
         <foreach collection="list" item="tmp"   separator=",">
-            (null,#{tmp.bedId},#{tmp.builderName},#{tmp.roomId},#{tmp.floorId},null,#{tmp.sex},#{tmp.principal},#{tmp.phone},0)
+            (null,#{tmp.bedId},#{tmp.builderName},#{tmp.className},#{tmp.profession},#{tmp.roomId},#{tmp.floorId},null,#{tmp.sex},#{tmp.principal},#{tmp.phone},0)
         </foreach>
     </insert>
 

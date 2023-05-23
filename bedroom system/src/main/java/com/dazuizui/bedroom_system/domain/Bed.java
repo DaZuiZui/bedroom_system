@@ -10,6 +10,12 @@ import java.io.Serializable;
  */
 public class Bed implements Serializable {
     @ColumnWidth(25)
+    @ExcelProperty("所属班级")
+    private String className;
+    @ColumnWidth(25)
+    @ExcelProperty("所属专业")
+    private String profession;
+    @ColumnWidth(25)
     @ExcelProperty("主键")
     private Long id;
     @ColumnWidth(25)
@@ -41,7 +47,9 @@ public class Bed implements Serializable {
     @Override
     public String toString() {
         return "Bed{" +
-                "id=" + id +
+                "className='" + className + '\'' +
+                ", profession='" + profession + '\'' +
+                ", id=" + id +
                 ", bedId=" + bedId +
                 ", roomId='" + roomId + '\'' +
                 ", floorId=" + floorId +
@@ -52,6 +60,22 @@ public class Bed implements Serializable {
                 ", status=" + status +
                 ", available=" + available +
                 '}';
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
     }
 
     public Long getId() {
@@ -137,7 +161,9 @@ public class Bed implements Serializable {
     public Bed() {
     }
 
-    public Bed(Long id, Integer bedId, String roomId, Integer floorId, String builderName, String sex, String principal, String phone, Integer status, Integer available) {
+    public Bed(String className, String profession, Long id, Integer bedId, String roomId, Integer floorId, String builderName, String sex, String principal, String phone, Integer status, Integer available) {
+        this.className = className;
+        this.profession = profession;
         this.id = id;
         this.bedId = bedId;
         this.roomId = roomId;

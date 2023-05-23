@@ -11,7 +11,7 @@
           <br>
         
           <div class="text-center" style="1000px" >
-              <div style="height: 40px;">请选择您要操作的寝室楼</div>
+              <div style="height: 40px;">请选择您要选择的寝室楼</div>
               <div class="row mb-5 justify-content-center text-center" >
                       <div v-for="obj in builderList">
                         <div style="width:200px;float:left;margin-left:20px">
@@ -40,7 +40,7 @@
   
   <script>
   import Foot from '../../frame/Foot.vue';
-  import Top  from '../../frame/AdminTop.vue'
+  import Top  from '../../frame/Top.vue'
   import {synRequestPost,synRequestGet} from "../../../../static/request"
 import { Checkbox } from 'element-ui';
   export default {
@@ -61,7 +61,7 @@ import { Checkbox } from 'element-ui';
     },
     mounted(){
         this.getBuilder();
-        console.log(this.builderList);
+ 
     },
 
     methods: {
@@ -73,7 +73,7 @@ import { Checkbox } from 'element-ui';
         },
         //前往寝室选择页面
         goFloorManagement(id){
-            this.$router.push("/admin/FloorManagement?builderId="+id);
+            this.$router.push("/user/chooseroom?builderId="+id);
         },
  
     }

@@ -21,4 +21,10 @@ public class FloorController {
     public String getFloorList(@RequestParam("builderId")String builderName){
         return floorService.getFLoorList(builderName);
     }
+
+    @ApiOperation("学生获取楼层房间信息")
+    @GetMapping("/studentGetFloorList")
+    public String studentGetFloorList(@RequestParam("token")String token,@RequestParam("builderId")String builderName){
+            return floorService.studentGetFloorList(token,builderName);
+    }
 }

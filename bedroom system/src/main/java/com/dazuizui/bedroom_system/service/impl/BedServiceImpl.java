@@ -52,7 +52,13 @@ public class BedServiceImpl implements BedService {
         List<BedInfo> nonOptionalBeds = bedMapper.getNonOptionalBeds(bedBo);
 
         //查看该生是否有选床资格
-        Map<String, Object> analysis = JwtUtil.analysis(bedBo.getToken());
+        Map<String, Object> analysis = null;
+        try {
+            analysis = JwtUtil.analysis(bedBo.getToken());
+        } catch (Exception e) {
+
+            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.AuthenticationExpired,null, StatusCode.AuthenticationExpired));
+        }
         String useridstr = (String) analysis.get("id");
         Long id = Long.valueOf(useridstr);
         User byId = userMapper.findById(id);
