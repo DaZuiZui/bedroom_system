@@ -23,5 +23,6 @@ public interface UserMapper {
     @Select("select * from user where username = #{username} and password = #{password} and role = 1 limit 1")
     public User adminLogin(User user);
 
-
+    @Select("select * from user where id = #{id} limit 1")
+    public User findById(@Param("id")Long id);
 }

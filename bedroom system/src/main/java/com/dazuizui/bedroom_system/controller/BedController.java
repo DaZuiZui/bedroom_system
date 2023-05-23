@@ -1,6 +1,7 @@
 package com.dazuizui.bedroom_system.controller;
 
 
+import com.dazuizui.bedroom_system.domain.bo.GetNotOptionalBedBo;
 import com.dazuizui.bedroom_system.service.BedService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,8 +29,15 @@ public class BedController {
         if (file == null){
 
         }
-        System.err.println(builderId);
+       // System.err.println(builderId);
         bedService.readExcel(file);
         return "hello";
+    }
+
+
+    @ApiOperation("查看不可选床位")
+    @PostMapping("/getNotOptionalBed")
+    public String getNotOptionalBed(@RequestBody GetNotOptionalBedBo getNotOptionalBedBo){
+        return bedService.getNonOptionalBeds(getNotOptionalBedBo);
     }
 }
