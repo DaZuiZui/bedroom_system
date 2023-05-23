@@ -24,7 +24,7 @@ public class BedController {
      */
     @ApiOperation("读入Excal获取学生数据写入数据库")
     @PostMapping("/readExcel")
-    public String readExcel(@RequestParam("file") MultipartFile file,@RequestParam("builderId")Integer builderId) throws IOException {
+    public String readExcel(@RequestParam("file") MultipartFile file,@RequestParam("builderId")String builderId) throws IOException {
         if (file == null){
 
         }

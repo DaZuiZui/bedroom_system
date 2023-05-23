@@ -36,6 +36,7 @@ public class Bed implements Serializable {
     @ColumnWidth(25)
     @ExcelProperty("状态")
     private Integer status;
+    private Integer available;
 
     @Override
     public String toString() {
@@ -49,6 +50,7 @@ public class Bed implements Serializable {
                 ", principal='" + principal + '\'' +
                 ", phone='" + phone + '\'' +
                 ", status=" + status +
+                ", available=" + available +
                 '}';
     }
 
@@ -124,10 +126,18 @@ public class Bed implements Serializable {
         this.status = status;
     }
 
+    public Integer getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Integer available) {
+        this.available = available;
+    }
+
     public Bed() {
     }
 
-    public Bed(Long id, Integer bedId, String roomId, Integer floorId, String builderName, String sex, String principal, String phone, Integer status) {
+    public Bed(Long id, Integer bedId, String roomId, Integer floorId, String builderName, String sex, String principal, String phone, Integer status, Integer available) {
         this.id = id;
         this.bedId = bedId;
         this.roomId = roomId;
@@ -137,5 +147,6 @@ public class Bed implements Serializable {
         this.principal = principal;
         this.phone = phone;
         this.status = status;
+        this.available = available;
     }
 }
