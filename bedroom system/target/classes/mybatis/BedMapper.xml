@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dazuizui.bedroom_system.mapper.BedMapper">
+    <insert id="insertBed">
+        insert into
+            bed
+        values
+        <foreach collection="list" item="tmp"   separator=",">
+            (null,#{tmp.bedId},#{tmp.builderName},#{tmp.roomId},#{tmp.floorId},null,#{tmp.sex},#{tmp.principal},#{tmp.phone},0)
+        </foreach>
+    </insert>
+</mapper>
+
