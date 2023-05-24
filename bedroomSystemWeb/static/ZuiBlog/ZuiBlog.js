@@ -91,6 +91,15 @@
             //跳转首页
             alert("账号密码错误");
             return false;
+        }else if(obj.code == '0x448'){
+            alert("选择失败您已经选择了床位");
+            return false;
+        }else if(obj.code == '0x449'){
+            alert("手慢了，已经被他人选择");
+            return false;
+        }else if(obj.code == '0x450'){
+            alert("您还没有缴费，无法选择该床位");
+            return false;
         }
 
         return true;

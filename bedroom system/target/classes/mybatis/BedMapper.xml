@@ -30,9 +30,13 @@
             room_id = #{roomId}
           AND floor_id = #{floor}
           AND builder_name = #{builderName}
+    </select>
 
-
-
+    <!--
+        查看床位状态
+    -->
+    <select id="findById" resultType="com.dazuizui.bedroom_system.domain.Bed">
+        select * from bed where id = #{id} for update
     </select>
 </mapper>
 

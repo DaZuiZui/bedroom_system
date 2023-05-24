@@ -20,4 +20,10 @@ public class StatusCodeMessage implements Serializable {
     public static final String IsNull = "数据为null";
     //密码错误
     public static final String PasswordError = "密码错误";
+    //已经选择床位
+    public static final String AlreadySelectedBed = "已经选择床位";
+    //床位已被他人选择
+    public static final String HasBeenChosenByOthers = "已经被他人选择";
+    //未缴费
+    public static final String Unpaid = "未缴费";
 }

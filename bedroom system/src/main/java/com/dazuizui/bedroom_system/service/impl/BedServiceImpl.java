@@ -12,8 +12,11 @@ import com.dazuizui.bedroom_system.mapper.BedMapper;
 import com.dazuizui.bedroom_system.mapper.UserMapper;
 import com.dazuizui.bedroom_system.service.BedService;
 import com.dazuizui.bedroom_system.util.JwtUtil;
+import com.dazuizui.bedroom_system.util.TransactionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.*;
@@ -31,6 +34,8 @@ public class BedServiceImpl implements BedService {
     private BedMapper bedMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private TransactionUtils transactionUtils;
 
     @Override
     public String readExcel(MultipartFile file) throws IOException {
@@ -90,9 +95,42 @@ public class BedServiceImpl implements BedService {
         Long id = Long.valueOf(useridstr);
         User byId = userMapper.findById(id);
 
+        //查看是否缴费
+        if (byId.getStatus() == 0){
+            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.Unpaid,null, StatusCode.Unpaid));
+        }
 
+        //查看是否已经选了床
+        BedInfo bedInfoById = bedMapper.findBedInfoById(id);
+        if (bedInfoById != null){
+            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.AlreadySelectedBed,null, StatusCode.AlreadySelectedBed));
+        }
 
-        return null;
+        //进行选择
+        System.out.println(transactionUtils);
+        TransactionStatus begin = transactionUtils.begin(TransactionDefinition.ISOLATION_READ_COMMITTED);
+
+        //悲关锁获取床位
+        Bed bed = bedMapper.findById(chooseBedBo.getBedId());
+        if (bed.getStatus() == 0){
+            //修改床位状态
+            Long numberOfOptions = bedMapper.updateStatusById(1, chooseBedBo.getBedId());
+            if (numberOfOptions == 0){
+                transactionUtils.rollback(begin);
+                return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.Error,null, StatusCode.Error));
+            }
+            //添加床位信息
+            numberOfOptions = bedMapper.insertBedInfo(chooseBedBo);
+            if (numberOfOptions == 0){
+                transactionUtils.rollback(begin);
+                return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.Error,null, StatusCode.Error));
+            }
+        }else{
+            transactionUtils.rollback(begin);
+            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.HasBeenChosenByOthers,null, StatusCode.HasBeenChosenByOthers));
+        }
+        transactionUtils.commit(begin);
+        return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,null, StatusCode.OK));
     }
 
 

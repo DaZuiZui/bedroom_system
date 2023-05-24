@@ -8,6 +8,8 @@ public class ChooseBedBo implements Serializable {
     private String roomId;
     private Integer floor;
     private Integer bendId;
+    private Long bedId;
+    private Long userId;
 
     @Override
     public String toString() {
@@ -17,6 +19,8 @@ public class ChooseBedBo implements Serializable {
                 ", roomId='" + roomId + '\'' +
                 ", floor=" + floor +
                 ", bendId=" + bendId +
+                ", bedId=" + bedId +
+                ", userId=" + userId +
                 '}';
     }
 
@@ -60,14 +64,33 @@ public class ChooseBedBo implements Serializable {
         this.bendId = bendId;
     }
 
+    public Long getBedId() {
+        return bedId;
+    }
+
+    public void setBedId(Long bedId) {
+        this.bedId = bedId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     public ChooseBedBo() {
     }
 
-    public ChooseBedBo(String token, String buildername, String roomId, Integer floor, Integer bendId) {
+    public ChooseBedBo(String token, String buildername, String roomId, Integer floor, Integer bendId, Long bedId, Long userId) {
+
         this.token = token;
         this.buildername = buildername;
         this.roomId = roomId;
         this.floor = floor;
         this.bendId = bendId;
+        this.bedId = bedId;
+        this.userId = userId;
     }
 }
