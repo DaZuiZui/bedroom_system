@@ -11,20 +11,7 @@
           <br>
           <div class="container">
             <div>
-                <el-upload
-                class="upload-demo"
-                :action="'http://127.0.0.1:4180/bed/readExcel?builderId='+builderId"
-                :on-preview="handlePreview"
-                :on-remove="handleRemove"
-                :before-remove="beforeRemove"
-                multiple
-                :limit="3"
-                name="file"
-                :on-exceed="handleExceed"
-                :file-list="fileList">
-                <el-button size="small" type="primary">点击上传床位信息</el-button>
-                <div slot="tip" class="el-upload__tip">只能上传excel文件</div>
-            </el-upload>
+     
               </div>
           </div>
           <div  style="600px" >

@@ -3,6 +3,7 @@ package com.dazuizui.bedroom_system.service.impl;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson2.JSONArray;
 import com.dazuizui.bedroom_system.domain.*;
+import com.dazuizui.bedroom_system.domain.bo.ChooseBedBo;
 import com.dazuizui.bedroom_system.domain.bo.GetNotOptionalBedBo;
 import com.dazuizui.bedroom_system.domain.vo.GetNonOptionalBedsVo;
 import com.dazuizui.bedroom_system.domain.vo.ResponseVo;
@@ -69,4 +70,30 @@ public class BedServiceImpl implements BedService {
 
         return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,getNonOptionalBedsVo, StatusCode.OK));
     }
+
+    /**
+     * 选择床位
+     * @param chooseBedBo
+     * @return
+     */
+    @Override
+    public String chooseBed(ChooseBedBo chooseBedBo) {
+        //获取学生数据
+        Map<String, Object> analysis = null;
+        try {
+            analysis = JwtUtil.analysis(chooseBedBo.getToken());
+        } catch (Exception e) {
+            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.AuthenticationExpired,null, StatusCode.AuthenticationExpired));
+        }
+        //获取user info
+        String useridstr = (String) analysis.get("id");
+        Long id = Long.valueOf(useridstr);
+        User byId = userMapper.findById(id);
+
+
+
+        return null;
+    }
+
+
 }

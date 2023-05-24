@@ -1,7 +1,12 @@
 package com.dazuizui.bedroom_system.controller;
 
 
+import com.alibaba.fastjson2.JSONArray;
+import com.dazuizui.bedroom_system.domain.StatusCode;
+import com.dazuizui.bedroom_system.domain.StatusCodeMessage;
+import com.dazuizui.bedroom_system.domain.bo.ChooseBedBo;
 import com.dazuizui.bedroom_system.domain.bo.GetNotOptionalBedBo;
+import com.dazuizui.bedroom_system.domain.vo.ResponseVo;
 import com.dazuizui.bedroom_system.service.BedService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,5 +44,20 @@ public class BedController {
     @PostMapping("/getNotOptionalBed")
     public String getNotOptionalBed(@RequestBody GetNotOptionalBedBo getNotOptionalBedBo){
         return bedService.getNonOptionalBeds(getNotOptionalBedBo);
+    }
+
+    /**
+     * 选择床位
+     * @param chooseBedBo
+     * @return
+     */
+    @ApiOperation("选择床位")
+    @PostMapping("/chooseBed")
+    public String chooseBed(@RequestBody ChooseBedBo chooseBedBo){
+        if (chooseBedBo == null){
+            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.IsNull,null, StatusCode.IsNull));
+        }
+
+        return "";
     }
 }
