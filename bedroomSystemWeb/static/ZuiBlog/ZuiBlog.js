@@ -2,7 +2,7 @@
    function setCookie(name, value) {
  
     if (value) {
-        alert("??");
+ 
         var Days = 365
         var exp = new Date()
         exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000)

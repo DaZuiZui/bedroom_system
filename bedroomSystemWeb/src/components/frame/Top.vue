@@ -37,7 +37,7 @@
                                 <a class="nav-link"  href="#"  >操作指南 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link"   >主页</a>
+                                <a class="nav-link" @click="goIndex()"  >主页</a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link" >我的</a>
@@ -80,7 +80,9 @@ import { synRequestGet } from '../../../static/request';
     
     },
     methods: {
-      
+        goIndex(){
+            this.$router.push("/user/choosebuilder");
+        }
     }
   }
   </script>

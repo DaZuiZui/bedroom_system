@@ -67,11 +67,12 @@ public class BedServiceImpl implements BedService {
         bedBo.setUserId(id);
         //获取已经被选的床位
         List<Bed> nonOptionalBeds = bedMapper.getNonOptionalBeds(bedBo);
-
+        System.err.println(byId);
         Boolean b = byId.getStatus() == 0 ? Boolean.FALSE : Boolean.TRUE;
         GetNonOptionalBedsVo getNonOptionalBedsVo = new GetNonOptionalBedsVo();
         getNonOptionalBedsVo.setNonOptionalBeds(nonOptionalBeds);
         getNonOptionalBedsVo.setStatus(b);
+
 
         return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,getNonOptionalBedsVo, StatusCode.OK));
     }

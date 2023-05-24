@@ -20,7 +20,7 @@
                      room_id = #{roomId}
                      AND t2.floor_id = #{floor}
                      AND t2.builder_name = #{builderName}
-                    AND t2.bed_id = t1.bed_id
+                    AND t2.bed_id = t1.id
                 limit 1
             ))) as 'name',
 	    if((select id from bedinfo t6 where t6.user_id = #{userId} limit 1)is not null,2,if((select id from user t6 where t6.id = #{userId} and t6.mojar = t1.profession and t6.class_id = t1.class_name ) is not null ,1,0)) as 'available'

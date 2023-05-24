@@ -232,15 +232,16 @@ import { Checkbox } from 'element-ui';
     methods: {
       async getBedInfo(){
         let obj = await synRequestPost("/bed/getNotOptionalBed",this.getNotOptionalBedBo);
- 
+        console.log(obj);
         if(check(obj)){
+          this.status = obj.data.status;
             for(let i = 0 ; i < obj.data.nonOptionalBeds.length ;i++){
                 this.$set(this.bedmap,obj.data.nonOptionalBeds[i].bedId,obj.data.nonOptionalBeds[i]);  
             }
-            console.log(this.bedmap[2].id);
+            console.log(this.bedmap[2].name);
          
 
-            this.status = obj.data.status;
+          
         }
       },
 
@@ -254,7 +255,7 @@ import { Checkbox } from 'element-ui';
         if(check(obj)){
           alert("选择成功")
         }else{
-          alert("asd");
+ 
           this.chooseButoon = false;
         }
 

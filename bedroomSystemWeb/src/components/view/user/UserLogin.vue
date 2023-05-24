@@ -48,7 +48,7 @@
   
   <script>
   import Foot from '../../frame/Foot.vue';
-  import Top  from '../../frame/Top.vue'
+  import Top  from '../../frame/LoginTop.vue'
   import {synRequestPost,synRequestGet} from "../../../../static/request"
 import { Checkbox } from 'element-ui';
   export default {
@@ -78,11 +78,15 @@ import { Checkbox } from 'element-ui';
             console.log(obj == "");
             if(check(obj)){
                 setCookie("token",obj.data);
-                alert("登入成功");
+                this.$router.push("/user/choosebuilder");
             }
 
             this.switchbutton = false;
         },
+
+        goIndex(){
+            this.$router.push("/user/choosebuilder");
+        }
     }
 }
   </script>
