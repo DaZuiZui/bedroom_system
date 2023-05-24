@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class ChooseBedBo implements Serializable {
     private String token;
-    private String buildername;
+    private String builderName;
     private String roomId;
     private Integer floor;
-    private Integer bendId;
+
     private Long bedId;
     private Long userId;
 
@@ -15,10 +15,9 @@ public class ChooseBedBo implements Serializable {
     public String toString() {
         return "ChooseBedBo{" +
                 "token='" + token + '\'' +
-                ", buildername='" + buildername + '\'' +
+                ", builderName='" + builderName + '\'' +
                 ", roomId='" + roomId + '\'' +
                 ", floor=" + floor +
-                ", bendId=" + bendId +
                 ", bedId=" + bedId +
                 ", userId=" + userId +
                 '}';
@@ -32,12 +31,12 @@ public class ChooseBedBo implements Serializable {
         this.token = token;
     }
 
-    public String getBuildername() {
-        return buildername;
+    public String getBuilderName() {
+        return builderName;
     }
 
-    public void setBuildername(String buildername) {
-        this.buildername = buildername;
+    public void setBuilderName(String builderName) {
+        this.builderName = builderName;
     }
 
     public String getRoomId() {
@@ -54,14 +53,6 @@ public class ChooseBedBo implements Serializable {
 
     public void setFloor(Integer floor) {
         this.floor = floor;
-    }
-
-    public Integer getBendId() {
-        return bendId;
-    }
-
-    public void setBendId(Integer bendId) {
-        this.bendId = bendId;
     }
 
     public Long getBedId() {
@@ -83,13 +74,11 @@ public class ChooseBedBo implements Serializable {
     public ChooseBedBo() {
     }
 
-    public ChooseBedBo(String token, String buildername, String roomId, Integer floor, Integer bendId, Long bedId, Long userId) {
-
+    public ChooseBedBo(String token, String builderName, String roomId, Integer floor, Long bedId, Long userId) {
         this.token = token;
-        this.buildername = buildername;
+        this.builderName = builderName;
         this.roomId = roomId;
         this.floor = floor;
-        this.bendId = bendId;
         this.bedId = bedId;
         this.userId = userId;
     }

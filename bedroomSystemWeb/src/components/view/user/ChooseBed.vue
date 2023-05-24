@@ -47,7 +47,7 @@
                              </div>
                  
                                <div v-else-if="bedmap[2].status == 0">
-                                  2号床  <el-link type="primary" style="font-size:20px">选择</el-link>
+                                  2号床  <el-link type="primary" style="font-size:20px" :disabled="chooseButoon" @click="chooseTheBed(bedmap[2].id)">选择</el-link>
                                </div>
                              
                           </span>
@@ -79,7 +79,7 @@
                              </div>
                          
                                <div v-else-if="bedmap[3].status == 0">
-                                  3号床  <el-link type="primary" style="font-size:20px">选择</el-link>
+                                  3号床  <el-link type="primary" style="font-size:20px" :disabled="chooseButoon" @click="chooseTheBed(bedmap[3].id)">选择</el-link>
                                </div>
                              
                           </span>
@@ -122,7 +122,7 @@
                               1号床    
                            </div>
                              <div v-else-if="bedmap[1].status == 0">
-                                1号床  <el-link type="primary" style="font-size:20px">选择</el-link>
+                                1号床  <el-link type="primary" style="font-size:20px" :disabled="chooseButoon" @click="chooseTheBed(bedmap[1].id)">选择</el-link>
                              </div>
                            
                         </span>
@@ -154,7 +154,7 @@
                               4号床    
                              </div>
                              <div v-else-if="bedmap[4].status == 0">
-                                4号床  <el-link type="primary" style="font-size:20px">选择</el-link>
+                                4号床  <el-link type="primary" style="font-size:20px" :disabled="chooseButoon" @click="chooseTheBed(bedmap[4].id)">选择</el-link>
                              </div>
                            
                         </span>
@@ -204,7 +204,7 @@ import { Checkbox } from 'element-ui';
             roomId: "",
             builderName: "",
             floor: "",
-            bedId: "",
+            bedId: 0,
         },
 
         //已经选的人
@@ -213,6 +213,8 @@ import { Checkbox } from 'element-ui';
         status: false,
 
         object: null,
+        //选择按钮
+        chooseButoon: false,
       }
     },
      mounted(){
@@ -231,21 +233,33 @@ import { Checkbox } from 'element-ui';
       async getBedInfo(){
         let obj = await synRequestPost("/bed/getNotOptionalBed",this.getNotOptionalBedBo);
  
- 
-        
- 
         if(check(obj)){
             for(let i = 0 ; i < obj.data.nonOptionalBeds.length ;i++){
                 this.$set(this.bedmap,obj.data.nonOptionalBeds[i].bedId,obj.data.nonOptionalBeds[i]);  
             }
-            console.log(this.bedmap);
+            console.log(this.bedmap[2].id);
          
 
             this.status = obj.data.status;
         }
       },
 
- 
+
+      //选择床位
+      async chooseTheBed(id){
+        alert(id);
+        this.chooseButoon = true;
+        this.getNotOptionalBedBo.bedId = id;
+        let obj = await synRequestPost("/bed/chooseBed",this.getNotOptionalBedBo);
+        if(check(obj)){
+          alert("选择成功")
+        }else{
+          alert("asd");
+          this.chooseButoon = false;
+        }
+
+        await this.getBedInfo();
+      }
     }
 }
   </script>

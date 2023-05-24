@@ -83,6 +83,8 @@ public class BedServiceImpl implements BedService {
      */
     @Override
     public String chooseBed(ChooseBedBo chooseBedBo) {
+        //URL编码解析
+        chooseBedBo.setBuilderName(URLDecoder.decode(chooseBedBo.getBuilderName()));
         //获取学生数据
         Map<String, Object> analysis = null;
         try {
@@ -94,7 +96,7 @@ public class BedServiceImpl implements BedService {
         String useridstr = (String) analysis.get("id");
         Long id = Long.valueOf(useridstr);
         User byId = userMapper.findById(id);
-
+        chooseBedBo.setUserId(byId.getId());
         //查看是否缴费
         if (byId.getStatus() == 0){
             return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.Unpaid,null, StatusCode.Unpaid));
@@ -112,22 +114,28 @@ public class BedServiceImpl implements BedService {
 
         //悲关锁获取床位
         Bed bed = bedMapper.findById(chooseBedBo.getBedId());
-        if (bed.getStatus() == 0){
-            //修改床位状态
-            Long numberOfOptions = bedMapper.updateStatusById(1, chooseBedBo.getBedId());
-            if (numberOfOptions == 0){
+        try {
+            if (bed.getStatus() == 0){
+                //修改床位状态
+                Long numberOfOptions = bedMapper.updateStatusById(1, chooseBedBo.getBedId());
+                if (numberOfOptions == 0){
+                    transactionUtils.rollback(begin);
+                    return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.Error,null, StatusCode.Error));
+                }
+                //添加床位信息
+                numberOfOptions = bedMapper.insertBedInfo(chooseBedBo);
+                if (numberOfOptions == 0){
+                    transactionUtils.rollback(begin);
+                    return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.Error,null, StatusCode.Error));
+                }
+            }else{
                 transactionUtils.rollback(begin);
-                return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.Error,null, StatusCode.Error));
+                return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.HasBeenChosenByOthers,null, StatusCode.HasBeenChosenByOthers));
             }
-            //添加床位信息
-            numberOfOptions = bedMapper.insertBedInfo(chooseBedBo);
-            if (numberOfOptions == 0){
-                transactionUtils.rollback(begin);
-                return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.Error,null, StatusCode.Error));
-            }
-        }else{
+        } catch (Exception e) {
+            e.printStackTrace();
             transactionUtils.rollback(begin);
-            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.HasBeenChosenByOthers,null, StatusCode.HasBeenChosenByOthers));
+            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.Error,null, StatusCode.Error));
         }
         transactionUtils.commit(begin);
         return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,null, StatusCode.OK));

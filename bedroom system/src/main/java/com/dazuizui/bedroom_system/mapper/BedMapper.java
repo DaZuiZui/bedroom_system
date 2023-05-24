@@ -28,6 +28,6 @@ public interface BedMapper {
      * @param chooseBedBo
      * @return
      */
-    @Insert("insert into bedinfo value(null,#{roomId},#{builderName},#{bedId},#{userId},#{floorId})")
+    @Insert("insert into bedinfo value(null,#{roomId},#{builderName},#{bedId},#{userId},#{floor})")
     public Long insertBedInfo(ChooseBedBo chooseBedBo);
 }

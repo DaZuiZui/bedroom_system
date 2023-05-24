@@ -57,7 +57,7 @@ public class BedController {
         if (chooseBedBo == null){
             return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.IsNull,null, StatusCode.IsNull));
         }
-
-        return "";
+        System.err.println(chooseBedBo);
+        return bedService.chooseBed(chooseBedBo);
     }
 }
