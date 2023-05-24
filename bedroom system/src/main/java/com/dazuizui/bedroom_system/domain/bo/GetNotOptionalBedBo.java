@@ -8,6 +8,7 @@ public class GetNotOptionalBedBo implements Serializable {
     private String builderName;
     private Integer floor;
     private Long   bedId;
+    private Long userId;
 
     @Override
     public String toString() {
@@ -17,6 +18,7 @@ public class GetNotOptionalBedBo implements Serializable {
                 ", builderName='" + builderName + '\'' +
                 ", floor=" + floor +
                 ", bedId=" + bedId +
+                ", userId=" + userId +
                 '}';
     }
 
@@ -60,14 +62,23 @@ public class GetNotOptionalBedBo implements Serializable {
         this.bedId = bedId;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     public GetNotOptionalBedBo() {
     }
 
-    public GetNotOptionalBedBo(String token, String roomId, String builderName, Integer floor, Long bedId) {
+    public GetNotOptionalBedBo(String token, String roomId, String builderName, Integer floor, Long bedId, Long userId) {
         this.token = token;
         this.roomId = roomId;
         this.builderName = builderName;
         this.floor = floor;
         this.bedId = bedId;
+        this.userId = userId;
     }
 }

@@ -43,6 +43,7 @@ public class Bed implements Serializable {
     @ExcelProperty("状态")
     private Integer status;
     private Integer available;
+    private String name;
 
     @Override
     public String toString() {
@@ -59,6 +60,7 @@ public class Bed implements Serializable {
                 ", phone='" + phone + '\'' +
                 ", status=" + status +
                 ", available=" + available +
+                ", name='" + name + '\'' +
                 '}';
     }
 
@@ -158,10 +160,18 @@ public class Bed implements Serializable {
         this.available = available;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Bed() {
     }
 
-    public Bed(String className, String profession, Long id, Integer bedId, String roomId, Integer floorId, String builderName, String sex, String principal, String phone, Integer status, Integer available) {
+    public Bed(String className, String profession, Long id, Integer bedId, String roomId, Integer floorId, String builderName, String sex, String principal, String phone, Integer status, Integer available, String name) {
         this.className = className;
         this.profession = profession;
         this.id = id;
@@ -174,5 +184,6 @@ public class Bed implements Serializable {
         this.phone = phone;
         this.status = status;
         this.available = available;
+        this.name = name;
     }
 }

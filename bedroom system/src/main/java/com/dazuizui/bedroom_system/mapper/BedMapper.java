@@ -13,5 +13,5 @@ public interface BedMapper {
 
     public Long insertBed(@Param("list")List<Bed> list);
 
-    public List<BedInfo> getNonOptionalBeds(GetNotOptionalBedBo bedBo);
+    public List<Bed> getNonOptionalBeds(GetNotOptionalBedBo bedBo);
 }

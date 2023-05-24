@@ -12,18 +12,27 @@
         </foreach>
     </insert>
 
-    <select id="getNonOptionalBeds" resultType="com.dazuizui.bedroom_system.domain.BedInfo" >
+    <select id="getNonOptionalBeds" resultType="com.dazuizui.bedroom_system.domain.Bed" >
         SELECT
-            id,
-            room_id,
-            builder_name,
-            bed_id,
-            (select name from user where id = t1.user_id limit 1) as 'name'
+            t1.*,
+            (
+                (select name from user where id = (select user_id from bedinfo t2 WHERE
+                     room_id = #{roomId}
+                     AND t2.floor_id = #{floor}
+                     AND t2.builder_name = #{builderName}
+                    AND t2.bed_id = t1.bed_id
+                limit 1
+            ))) as 'name',
+	 if((select id from user t6 where t6.id = #{userId} and t6.mojar = t1.profession and t6.class_id = t1.class_name ) is not null ,1,0) as 'available'
         FROM
-            bedinfo t1
-        where
-            room_id = #{roomId} and
-            builder_name = #{builderName}
+            bed t1
+        WHERE
+            room_id = #{roomId}
+          AND floor_id = #{floor}
+          AND builder_name = #{builderName}
+
+
+
     </select>
 </mapper>
 

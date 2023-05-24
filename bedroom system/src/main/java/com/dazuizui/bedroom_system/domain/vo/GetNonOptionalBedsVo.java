@@ -1,5 +1,6 @@
 package com.dazuizui.bedroom_system.domain.vo;
 
+import com.dazuizui.bedroom_system.domain.Bed;
 import com.dazuizui.bedroom_system.domain.BedInfo;
 
 import java.io.Serializable;
@@ -8,7 +9,7 @@ import java.util.Map;
 
 public class GetNonOptionalBedsVo implements Serializable {
 
-    private List<BedInfo> nonOptionalBeds;
+    private List<Bed> nonOptionalBeds;
 
 
     private Boolean status;
@@ -22,11 +23,11 @@ public class GetNonOptionalBedsVo implements Serializable {
                 '}';
     }
 
-    public List<BedInfo> getNonOptionalBeds() {
+    public List<Bed> getNonOptionalBeds() {
         return nonOptionalBeds;
     }
 
-    public void setNonOptionalBeds(List<BedInfo> nonOptionalBeds) {
+    public void setNonOptionalBeds(List<Bed> nonOptionalBeds) {
         this.nonOptionalBeds = nonOptionalBeds;
     }
 
@@ -41,7 +42,7 @@ public class GetNonOptionalBedsVo implements Serializable {
     public GetNonOptionalBedsVo() {
     }
 
-    public GetNonOptionalBedsVo(List<BedInfo> nonOptionalBeds, Boolean status) {
+    public GetNonOptionalBedsVo(List<Bed> nonOptionalBeds, Boolean status) {
         this.nonOptionalBeds = nonOptionalBeds;
         this.status = status;
     }

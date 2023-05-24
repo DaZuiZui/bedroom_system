@@ -21,6 +21,8 @@
 
     <select id="studentGetFloor" resultType="com.dazuizui.bedroom_system.domain.Bed">
         SELECT DISTINCT
+            t3.builder_name,
+            t3.floor_id,
             t3.room_id,
             (
                     (

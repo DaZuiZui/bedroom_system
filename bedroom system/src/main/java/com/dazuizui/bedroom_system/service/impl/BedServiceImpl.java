@@ -48,20 +48,20 @@ public class BedServiceImpl implements BedService {
     @Override
     public String getNonOptionalBeds(GetNotOptionalBedBo bedBo) {
         bedBo.setBuilderName(URLDecoder.decode(bedBo.getBuilderName()));
-        //获取已经被选的床位
-        List<BedInfo> nonOptionalBeds = bedMapper.getNonOptionalBeds(bedBo);
-
         //查看该生是否有选床资格
         Map<String, Object> analysis = null;
         try {
             analysis = JwtUtil.analysis(bedBo.getToken());
         } catch (Exception e) {
-
             return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.AuthenticationExpired,null, StatusCode.AuthenticationExpired));
         }
         String useridstr = (String) analysis.get("id");
         Long id = Long.valueOf(useridstr);
         User byId = userMapper.findById(id);
+        bedBo.setUserId(id);
+        //获取已经被选的床位
+        List<Bed> nonOptionalBeds = bedMapper.getNonOptionalBeds(bedBo);
+
         Boolean b = byId.getStatus() == 0 ? Boolean.FALSE : Boolean.TRUE;
         GetNonOptionalBedsVo getNonOptionalBedsVo = new GetNonOptionalBedsVo();
         getNonOptionalBedsVo.setNonOptionalBeds(nonOptionalBeds);
