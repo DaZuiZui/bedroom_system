@@ -24,11 +24,5 @@ public interface FloorMapper {
             " bed t1 where builder_name = #{builderName} and floor_id = #{floorId}")
     public List<Bed> getRoomName(@Param("builderName") String builderName, @Param("floorId") Integer floorId);
 
-    @Select("SELECT " +
-            "DISTINCT room_id," +
-            "(4 - (select count(*) from bedinfo where builder_name = t1.builder_name and room_id = t1.room_id and floor_id = t1.floor_id)) as 'available'" +
-            "from" +
-            " bed t1 where builder_name = #{builderName}    and         profession = #{profession} and" +
-            "            class_name = #{className} and floor_id = #{floorId}")
     public List<Bed> studentGetFloor(@Param("builderName") String builderName,@Param("profession")String profession,@Param("className")String className, @Param("floorId") Integer floorId);
 }

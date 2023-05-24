@@ -18,5 +18,45 @@
             profession = #{profession} and
             class_name = #{className}
     </select>
+
+    <select id="studentGetFloor" resultType="com.dazuizui.bedroom_system.domain.Bed">
+        SELECT DISTINCT
+            t3.room_id,
+            (
+                    (
+                        SELECT
+                            count(*)
+                        FROM
+                            bed t1
+                        where
+                            builder_name = #{builderName} AND
+                            profession = #{profession} AND
+                            floor_id =  #{floorId} AND
+                            t1.room_id = t3.room_id
+                          AND class_name = #{className}
+                    ) - (
+                        SELECT
+                            count(*)
+                        FROM
+                            bedinfo t1
+                                INNER JOIN
+                            `user` t2
+                            ON
+                                        t1.user_id = t2.id
+                                    and t2.mojar = #{profession}  AND
+                                        t2.class_id = #{className}
+                        WHERE
+                            t1.builder_name = #{builderName}  AND
+                            t1.room_id = t3.room_id AND
+                            t1.floor_id =  #{floorId} )
+                ) AS 'available'
+        FROM
+            bed t3
+        WHERE
+            builder_name = #{builderName}
+          AND profession =  #{profession}
+          AND class_name = #{className}
+          AND floor_id = #{floorId}
+    </select>
 </mapper>
 
