@@ -5,10 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -21,5 +18,18 @@ public class BuilderController {
     @GetMapping("/findAllbuilder")
     public String findAllbuilder(){
         return builderService.findAllbuilder();
+    }
+
+    @ApiOperation("查看性别是否合法")
+    @GetMapping("/findById")
+    public String findById(@RequestParam("token") String token,@RequestParam("builderId")String builderId){
+        return builderService.findById(token,builderId);
+    }
+
+
+    @ApiOperation("查看性别是否合法")
+    @GetMapping("/findByuserId")
+    public String findByuserId(Long userId){
+        return builderService.findByuserId(userId);
     }
 }

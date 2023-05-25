@@ -19,7 +19,7 @@ public class User implements Serializable {
     private Long updateBy;
     private Date updateTime;
     private Integer status;
-    private Integer sex;
+    private String sex;
 
     @Override
     public String toString() {
@@ -38,7 +38,7 @@ public class User implements Serializable {
                 ", updateBy=" + updateBy +
                 ", updateTime=" + updateTime +
                 ", status=" + status +
-                ", sex=" + sex +
+                ", sex='" + sex + '\'' +
                 '}';
     }
 
@@ -154,18 +154,18 @@ public class User implements Serializable {
         this.status = status;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
     public User() {
     }
 
-    public User(Long id, String username, String password, Integer role, String mojar, String college, String classId, Integer grade, String principal, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer sex) {
+    public User(Long id, String username, String password, Integer role, String mojar, String college, String classId, Integer grade, String principal, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, String sex) {
         this.id = id;
         this.username = username;
         this.password = password;

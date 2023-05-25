@@ -74,7 +74,8 @@ import { Checkbox } from 'element-ui';
     },
     mounted(){
         this.builderId = getQueryVariable("builderId");
- 
+        //查看性别是否合法  
+        this.checkSex();
         this.getRoom();
     },
 
@@ -94,7 +95,14 @@ import { Checkbox } from 'element-ui';
       beforeRemove(file, fileList) {
         return this.$confirm(`确定移除 ${ file.name }？`);
       } ,
-
+      async checkSex(){
+        let obj = await synRequestGet("/builder/findById?token="+getCookie("token")+"&builderId="+getQueryVariable("builderId"));
+        if(obj.data == false){
+            alert("您的性别无法选择该寝室楼");
+            this.$router.push("/user/choosebuilder");
+            return;
+        }
+      },
 
       async getRoom(){
            let obj = await synRequestGet("/floor/studentGetFloorList?token="+getCookie("token")+"&builderId="+getQueryVariable("builderId"));

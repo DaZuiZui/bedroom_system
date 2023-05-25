@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     public String userLogin(User user) {
         User userInDB = userMapper.userlogin(user);
         if (userInDB == null){
-            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.Error,null, StatusCode.Error));
+            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.PasswordError,null, StatusCode.PasswordError));
         }
 
         String jwt = JwtUtil.createJWT(userInDB);
