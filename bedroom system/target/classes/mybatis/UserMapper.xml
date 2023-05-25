@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dazuizui.bedroom_system.mapper.UserMapper">
+    <insert id="insertUser">
+        insert into
+            user
+        values
+            <foreach collection="list" item="tmp" separator=",">
+                (null,#{tmp.name},#{tmp.username},#{tmp.password},0,#{tmp.sex},#{tmp.mojar},#{tmp.college},#{tmp.classId},#{tmp.grade},#{tmp.principal}
+                ,null,null,null,null,0)
+            </foreach>
+    </insert>
+
+    <select id="GetPaginationInfoBo" resultType="com.dazuizui.bedroom_system.domain.User">
+        select
+            *
+        from
+            user
+        limit
+            #{start},#{number}
+
+    </select>
+</mapper>
+
