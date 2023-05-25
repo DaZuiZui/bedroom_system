@@ -7,6 +7,7 @@ import com.dazuizui.bedroom_system.domain.User;
 import com.dazuizui.bedroom_system.domain.bo.GetPaginationInfoBo;
 import com.dazuizui.bedroom_system.domain.vo.GetPaginationInfoVo;
 import com.dazuizui.bedroom_system.domain.vo.ResponseVo;
+
 import com.dazuizui.bedroom_system.excel.UserListerner;
 import com.dazuizui.bedroom_system.mapper.UserMapper;
 import com.dazuizui.bedroom_system.service.UserService;
@@ -27,8 +28,7 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-    private UserListerner userListerner;
+
 
     /**
      * 用户登入
@@ -69,10 +69,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String readExcel(MultipartFile file) throws IOException {
-        EasyExcel.read(file.getInputStream(),User.class,userListerner).sheet().doRead();
-        List<User> users = userListerner.get();
 
-        userMapper.insertUser(users);
+        UserListerner userListerner = new UserListerner();
+        EasyExcel.read(file.getInputStream(),User.class,userListerner).sheet().doRead();
+        System.out.println(userListerner.get());
+        userMapper.insertUser(userListerner.get());
         return null;
     }
 
@@ -80,6 +81,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String GetPaginationInfo(GetPaginationInfoBo getPaginationInfoBo) {
         List<User> users = userMapper.GetPaginationInfoBo(getPaginationInfoBo);
+
         Long querycount = userMapper.querycount();
         GetPaginationInfoVo getPaginationInfoVo = new GetPaginationInfoVo();
         getPaginationInfoVo.setCount(querycount);

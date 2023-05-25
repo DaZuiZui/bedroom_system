@@ -29,8 +29,7 @@ import java.util.Map;
 
 @Service
 public class BedServiceImpl implements BedService {
-    @Autowired
-    private BedListerner bedListerner ;
+
     @Autowired
     private BedMapper bedMapper;
     @Autowired
@@ -40,15 +39,12 @@ public class BedServiceImpl implements BedService {
 
     @Override
     public String readExcel(MultipartFile file) throws IOException {
+        BedListerner bedListerner = new BedListerner();
         EasyExcel.read(file.getInputStream(),Bed.class,bedListerner).sheet().doRead();
         //获取数据
         List<Bed> list = bedListerner.list;
         //写入数据库
-
         Long aLong = bedMapper.insertBed(list);
-
-
-        bedListerner.clear();
         return null;
     }
 

@@ -57,7 +57,6 @@ public class FloorServiceImpl implements FloorService {
         String classId = byId.getClassId();
 
         //查看最大楼层
-        //查看最大楼层
         Integer maxFloor = floorMapper.studentGetMaxFloor(builderName,mojar,classId);
         if (maxFloor == null) maxFloor = 0;
         List<List<Bed>> res = new ArrayList<>();

@@ -20,6 +20,7 @@
                 multiple
                 :limit="3"
                 name="file"
+                :on-success="fileOK"
                 :on-exceed="handleExceed"
                 :file-list="fileList">
                 <el-button size="small" type="primary">点击上传床位信息</el-button>
@@ -110,7 +111,10 @@ import { Checkbox } from 'element-ui';
         return this.$confirm(`确定移除 ${ file.name }？`);
       } ,
 
-
+      fileOK(){
+        alert("上传成功");
+        this.getRoom();
+      },
       async getRoom(){
            let obj = await synRequestGet("/floor/getFloorList?builderId="+getQueryVariable("builderId"));
             if(check(obj)){
