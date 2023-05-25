@@ -4,6 +4,8 @@ import com.alibaba.excel.EasyExcel;
 import com.dazuizui.bedroom_system.domain.StatusCode;
 import com.dazuizui.bedroom_system.domain.StatusCodeMessage;
 import com.dazuizui.bedroom_system.domain.User;
+import com.dazuizui.bedroom_system.domain.bo.GetPaginationInfoBo;
+import com.dazuizui.bedroom_system.domain.vo.GetPaginationInfoVo;
 import com.dazuizui.bedroom_system.domain.vo.ResponseVo;
 import com.dazuizui.bedroom_system.excel.UserListerner;
 import com.dazuizui.bedroom_system.mapper.UserMapper;
@@ -54,7 +56,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String adminLogin(User user) {
         User userInDB = userMapper.adminLogin(user);
-        System.out.println(userInDB);
+
         if (userInDB == null){
             return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.PasswordError,null, StatusCode.PasswordError));
         }
@@ -69,9 +71,20 @@ public class UserServiceImpl implements UserService {
     public String readExcel(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(),User.class,userListerner).sheet().doRead();
         List<User> users = userListerner.get();
+
         userMapper.insertUser(users);
         return null;
     }
 
 
+    @Override
+    public String GetPaginationInfo(GetPaginationInfoBo getPaginationInfoBo) {
+        List<User> users = userMapper.GetPaginationInfoBo(getPaginationInfoBo);
+        Long querycount = userMapper.querycount();
+        GetPaginationInfoVo getPaginationInfoVo = new GetPaginationInfoVo();
+        getPaginationInfoVo.setCount(querycount);
+        getPaginationInfoVo.setList(users);
+
+        return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,getPaginationInfoVo, StatusCode.OK));
+    }
 }

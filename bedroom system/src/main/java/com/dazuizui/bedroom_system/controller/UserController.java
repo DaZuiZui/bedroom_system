@@ -4,10 +4,12 @@ import com.alibaba.fastjson2.JSONArray;
 import com.dazuizui.bedroom_system.domain.StatusCode;
 import com.dazuizui.bedroom_system.domain.StatusCodeMessage;
 import com.dazuizui.bedroom_system.domain.User;
+import com.dazuizui.bedroom_system.domain.bo.GetPaginationInfoBo;
 import com.dazuizui.bedroom_system.domain.vo.ResponseVo;
 import com.dazuizui.bedroom_system.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -64,4 +66,9 @@ public class UserController {
         return "hello";
     }
 
+    @ApiOperation("分页获取学生数据")
+    @PostMapping("/GetPaginationInfoBo")
+    public String GetPaginationInfo(@RequestBody GetPaginationInfoBo getPaginationInfoBo){
+        return userService.GetPaginationInfo(getPaginationInfoBo);
+    }
 }

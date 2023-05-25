@@ -1,6 +1,7 @@
 package com.dazuizui.bedroom_system.mapper;
 
 import com.dazuizui.bedroom_system.domain.User;
+import com.dazuizui.bedroom_system.domain.bo.GetPaginationInfoBo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -29,4 +30,14 @@ public interface UserMapper {
     public User findById(@Param("id")Long id);
 
     public Long insertUser(List<User> list);
+
+    /**
+     *
+     * @param getPaginationInfoBo
+     * @return
+     */
+    public List<User> GetPaginationInfoBo(GetPaginationInfoBo getPaginationInfoBo);
+
+    @Select("select count(*) from user")
+    public Long querycount();
 }

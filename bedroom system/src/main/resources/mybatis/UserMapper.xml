@@ -8,9 +8,19 @@
             user
         values
             <foreach collection="list" item="tmp" separator=",">
-                (null,#{name},#{username},#{password},0,#{sex},#{mojar},#{college},#{classId},#{grade},#{principal}
+                (null,#{tmp.name},#{tmp.username},#{tmp.password},0,#{tmp.sex},#{tmp.mojar},#{tmp.college},#{tmp.classId},#{tmp.grade},#{tmp.principal}
                 ,null,null,null,null,0)
             </foreach>
     </insert>
+
+    <select id="GetPaginationInfoBo" resultType="com.dazuizui.bedroom_system.domain.User">
+        select
+            *
+        from
+            user
+        limit
+            #{start},#{number}
+
+    </select>
 </mapper>
 
