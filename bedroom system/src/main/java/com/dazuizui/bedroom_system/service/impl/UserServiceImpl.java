@@ -1,14 +1,13 @@
 package com.dazuizui.bedroom_system.service.impl;
 
 import com.alibaba.excel.EasyExcel;
-import com.dazuizui.bedroom_system.domain.StatusCode;
-import com.dazuizui.bedroom_system.domain.StatusCodeMessage;
-import com.dazuizui.bedroom_system.domain.User;
+import com.dazuizui.bedroom_system.domain.*;
 import com.dazuizui.bedroom_system.domain.bo.GetPaginationInfoBo;
 import com.dazuizui.bedroom_system.domain.vo.GetPaginationInfoVo;
 import com.dazuizui.bedroom_system.domain.vo.ResponseVo;
 
 import com.dazuizui.bedroom_system.excel.UserListerner;
+import com.dazuizui.bedroom_system.mapper.BedMapper;
 import com.dazuizui.bedroom_system.mapper.UserMapper;
 import com.dazuizui.bedroom_system.service.UserService;
 import com.dazuizui.bedroom_system.util.JwtUtil;
@@ -28,7 +27,8 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
-
+    @Autowired
+    private BedMapper bedMapper;
 
     /**
      * 用户登入
@@ -88,5 +88,26 @@ public class UserServiceImpl implements UserService {
         getPaginationInfoVo.setList(users);
 
         return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,getPaginationInfoVo, StatusCode.OK));
+    }
+
+    @Override
+    public String findById(String token) {
+        //获取id
+        Map<String, Object> analysis = null;
+        try {
+            analysis = JwtUtil.analysis(token);
+        } catch (Exception e) {
+
+            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.AuthenticationExpired,null, StatusCode.AuthenticationExpired));
+        }
+        String useridstr = (String) analysis.get("id");
+        Long id = Long.valueOf(useridstr);
+        System.out.println("666");
+        BedInfo bedInfoById = bedMapper.findBedInfoById(id);
+        Integer bedId = bedInfoById.getBedId();
+        System.out.println(bedId);
+        Bed byId = bedMapper.fd(Long.valueOf(bedId));
+        System.out.println(byId);
+        return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,byId,StatusCode.OK));
     }
 }

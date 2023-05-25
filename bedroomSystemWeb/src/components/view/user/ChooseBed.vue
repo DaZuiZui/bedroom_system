@@ -248,7 +248,7 @@ export default {
 
     //选择床位
     async chooseTheBed(id){
-      alert(id)
+    
       this.chooseButoon = true;
       this.getNotOptionalBedBo.bedId = id;
       let obj = await synRequestPost("/bed/chooseBed",this.getNotOptionalBedBo);

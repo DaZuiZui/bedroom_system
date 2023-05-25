@@ -6,6 +6,7 @@ import com.dazuizui.bedroom_system.domain.StatusCodeMessage;
 import com.dazuizui.bedroom_system.domain.User;
 import com.dazuizui.bedroom_system.domain.bo.GetPaginationInfoBo;
 import com.dazuizui.bedroom_system.domain.vo.ResponseVo;
+import com.dazuizui.bedroom_system.mapper.UserMapper;
 import com.dazuizui.bedroom_system.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,6 +24,8 @@ import java.io.IOException;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 用户登入
@@ -70,5 +73,13 @@ public class UserController {
     @PostMapping("/GetPaginationInfoBo")
     public String GetPaginationInfo(@RequestBody GetPaginationInfoBo getPaginationInfoBo){
         return userService.GetPaginationInfo(getPaginationInfoBo);
+    }
+
+
+    @ApiOperation("查询学生信息")
+    @GetMapping("/findById")
+    public String findById(@RequestParam("token")String token){
+
+        return userService.findById(token);
     }
 }

@@ -30,4 +30,6 @@ public interface UserService {
     public String readExcel(MultipartFile file) throws IOException;
 
     public String GetPaginationInfo(GetPaginationInfoBo getPaginationInfoBo);
+
+    public String findById(String token);
 }

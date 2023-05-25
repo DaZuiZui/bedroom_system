@@ -19,6 +19,8 @@ public interface BedMapper {
     public BedInfo findBedInfoById(@Param("userId")Long userId);
 
     public Bed findById(@Param("id")Long id);
+    @Select("select * from bed where id = #{id}")
+    public Bed fd(@Param("id")Long id);
 
     @Update("update bed set status = #{status} where id = #{id}")
     public Long updateStatusById(@Param("status")Integer status,@Param("id")Long id);

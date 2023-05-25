@@ -65,10 +65,7 @@ import { Checkbox } from 'element-ui';
                 this.user = obj.data;
             }
         },
-        //前往寝室选择页面
-        goFloorManagement(id){
-            this.$router.push("/user/chooseroom?builderId="+id);
-        },
+ 
  
     }
 }
