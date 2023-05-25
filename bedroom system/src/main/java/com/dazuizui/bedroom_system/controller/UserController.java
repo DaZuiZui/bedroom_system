@@ -10,6 +10,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @CrossOrigin
@@ -49,5 +52,16 @@ public class UserController {
         return userService.adminLogin(user);
     }
 
+    /**
+     * 通过Excal导入学生信息
+     * @param file
+     * @return
+     */
+    @ApiOperation("读入Excal获取学生数据写入数据库")
+    @PostMapping("/readExcel")
+    public String readExcel(MultipartFile file) throws IOException{
+        userService.readExcel(file);
+        return "hello";
+    }
 
 }

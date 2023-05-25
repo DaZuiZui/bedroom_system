@@ -31,6 +31,6 @@ public interface BedMapper {
     @Insert("insert into bedinfo value(null,#{roomId},#{builderName},#{bedId},#{userId},#{floor})")
     public Long insertBedInfo(ChooseBedBo chooseBedBo);
 
-    @Select("select * from bedinfo where builder_name = #{builderName} and floor_id = #{floor} and room_id = #{roomId} ")
+    @Select("select *,(select name from user where id = user_id limit 1) as 'name' from bedinfo where builder_name = #{builderName} and floor_id = #{floor} and room_id = #{roomId} ")
     public List<BedInfo> checkBed(GetNotOptionalBedBo getNotOptionalBedBo);
 }

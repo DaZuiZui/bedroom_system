@@ -3,6 +3,9 @@ package com.dazuizui.bedroom_system.service;
 import com.dazuizui.bedroom_system.domain.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * 用户业务接口
@@ -23,5 +26,5 @@ public interface UserService {
      */
     public String adminLogin(User user);
 
-
+    public String readExcel(MultipartFile file) throws IOException;
 }

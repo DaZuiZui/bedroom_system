@@ -37,7 +37,7 @@
                                 <a class="nav-link"  href="#"> 操作指南 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link"> 用户管理</a>
+                                <a class="nav-link" @click="goUser()"> 用户管理</a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link" @click="goBuilder()" > 寝室管理</a>
@@ -88,6 +88,10 @@ import { synRequestGet } from '../../../static/request';
         async goBuilder(){
             this.$router.push("/admin/StudentBuilderManagement");
         },
+
+        goUser(){
+            this.$router.push("/admin/UserManagement");
+        },  
     }
   }
   </script>
