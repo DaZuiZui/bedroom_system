@@ -60,5 +60,39 @@
           AND class_name = #{className}
           AND floor_id = #{floorId}
     </select>
+
+    <select id="getRoomName" resultType="com.dazuizui.bedroom_system.domain.Bed">
+        SELECT DISTINCT
+            t3.builder_name,
+            t3.floor_id,
+            t3.room_id,
+            (
+                    (
+                        SELECT
+                            count(*)
+                        FROM
+                            bed t1
+                        where
+                            builder_name = #{builderName} AND
+                            t1.room_id = t3.room_id           AND floor_id = #{floorId}
+
+                    ) - (
+                        SELECT
+                            count(*)
+                        FROM
+                            bedinfo t1
+                                INNER JOIN
+                            `user` t2
+                            ON
+                                        t1.user_id = t2.id
+                        WHERE
+                            t1.builder_name = #{builderName}  AND
+                            t1.room_id = t3.room_id           AND floor_id = #{floorId} )
+                ) AS 'available'
+        FROM
+            bed t3
+        WHERE
+            builder_name = #{builderName}           AND floor_id = #{floorId}
+    </select>
 </mapper>
 

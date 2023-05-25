@@ -40,7 +40,7 @@
                                 <a class="nav-link"> 用户管理</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link"> 寝室管理</a>
+                                <a class="nav-link" @click="goBuilder()" > 寝室管理</a>
                             </li>
                         </ul>
 
@@ -83,7 +83,11 @@ import { synRequestGet } from '../../../static/request';
             if(check(obj)){
                 
             }
-        }
+        },
+
+        async goBuilder(){
+            this.$router.push("/admin/StudentBuilderManagement");
+        },
     }
   }
   </script>
