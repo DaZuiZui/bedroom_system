@@ -1,5 +1,6 @@
 package com.dazuizui.bedroom_system.mapper;
 
+import com.dazuizui.bedroom_system.domain.Bed;
 import com.dazuizui.bedroom_system.domain.BedInfo;
 import com.dazuizui.bedroom_system.domain.Builder;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,6 +24,6 @@ public interface BuilderMapper {
     @Select("select * from builder where name = #{builderId}")
     public Builder findById(@Param("builderId")String builderId);
 
-    @Select("select * from bedinfo where user_id = #{userId} ")
-    public BedInfo findByuserId(@Param("userId") Long userId);
+    @Select("SELECT t2.*  FROM bedinfo t1 LEFT JOIN  bed t2  ON  t1.bed_id = t2.id  WHERE t1.user_id = #{userId} limit 1 ")
+    public Bed findByuserId(@Param("userId") Long userId);
 }

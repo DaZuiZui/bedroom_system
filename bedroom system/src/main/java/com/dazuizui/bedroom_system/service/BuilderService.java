@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public interface BuilderService {
     public String findAllbuilder();
-    public String findByuserId(@Param("userId") Long userId);
+    public String findByuserId(String token);
 
     public String findById(String token,String id);
 }

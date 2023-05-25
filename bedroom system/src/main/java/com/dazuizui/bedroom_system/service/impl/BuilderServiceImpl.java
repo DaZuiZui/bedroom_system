@@ -30,8 +30,18 @@ public class BuilderServiceImpl implements BuilderService {
     }
 
     @Override
-    public String findByuserId(Long userId) {
-        BedInfo byuserId = builderMapper.findByuserId(userId);
+    public String findByuserId(String token) {
+        Map<String, Object> analysis = null;
+        try {
+            analysis = JwtUtil.analysis(token);
+        } catch (Exception e) {
+            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.AuthenticationExpired,null, StatusCode.AuthenticationExpired));
+        }
+        String useridstr = (String) analysis.get("id");
+        Long userId = Long.valueOf(useridstr);
+
+        Bed byuserId = builderMapper.findByuserId(userId);
+        //System.out.println(byuserId);
         return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,byuserId, StatusCode.OK));
     }
 

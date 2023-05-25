@@ -8,6 +8,8 @@ import FloorManagement from '@/components/view/admin/FloorManagement'
 import UserFloor from '@/components/view/user/UserFloor'
 import UserBuilder from '@/components/view/user/UserBuilder'
 import UserChooseBed from '@/components/view/user/ChooseBed'
+import UserInfo from '@/components/view/user/MyInfo'
+import Help from '@/components/view/user/Help'
 Vue.use(Router)
 
 export default new Router({
@@ -15,6 +17,16 @@ export default new Router({
   base: '/h',
 
   routes: [
+    {
+      path: '/user/help',
+      name: 'help',
+      component: Help
+    },
+    {
+      path: '/user/myinfo',
+      name: 'myinfo',
+      component: UserInfo
+    },
     {
       path: '/user/UserChooseBed',
       name: 'UserChooseBed',

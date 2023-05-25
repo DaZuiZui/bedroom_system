@@ -34,13 +34,13 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav mt-4 mt-lg-0 ml-auto">
                             <li class="nav-item ">
-                                <a class="nav-link"  href="#"  @click="goHelp()">操作指南 </a>
+                                <a class="nav-link"  href="#"  >操作指南 </a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link" @click="goIndex()"  >主页</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" @click="goInfo()" >我的</a>
+                                <a class="nav-link" >我的</a>
                             </li>
                   
  
@@ -82,12 +82,6 @@ import { synRequestGet } from '../../../static/request';
     methods: {
         goIndex(){
             this.$router.push("/user/choosebuilder");
-        },
-        goInfo(){
-            this.$router.push("/user/myinfo");
-        },
-        goHelp(){
-            this.$router.push("/user/help");
         }
     }
   }

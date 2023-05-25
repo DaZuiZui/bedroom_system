@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class BuilderController {
     @Autowired
     private BuilderService builderService;
+
+
     @ApiOperation("获取全部数据名字")
     @GetMapping("/findAllbuilder")
     public String findAllbuilder(){
@@ -29,7 +31,7 @@ public class BuilderController {
 
     @ApiOperation("查看性别是否合法")
     @GetMapping("/findByuserId")
-    public String findByuserId(Long userId){
-        return builderService.findByuserId(userId);
+    public String findByuserId(String token){
+        return builderService.findByuserId(token);
     }
 }
