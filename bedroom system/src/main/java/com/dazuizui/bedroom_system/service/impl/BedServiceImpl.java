@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.*;
@@ -140,6 +141,13 @@ public class BedServiceImpl implements BedService {
         }
         transactionUtils.commit(begin);
         return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,null, StatusCode.OK));
+    }
+
+    @Override
+    public String checkBed( GetNotOptionalBedBo getNotOptionalBedBo) {
+        List<BedInfo> bedInfos = bedMapper.checkBed(getNotOptionalBedBo);
+        System.err.println(bedInfos);
+        return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,bedInfos, StatusCode.OK));
     }
 
 

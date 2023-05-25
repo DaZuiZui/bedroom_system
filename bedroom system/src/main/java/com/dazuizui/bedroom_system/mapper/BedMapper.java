@@ -30,4 +30,7 @@ public interface BedMapper {
      */
     @Insert("insert into bedinfo value(null,#{roomId},#{builderName},#{bedId},#{userId},#{floor})")
     public Long insertBedInfo(ChooseBedBo chooseBedBo);
+
+    @Select("select * from bedinfo where builder_name = #{builderName} and floor_id = #{floor} and room_id = #{roomId} ")
+    public List<BedInfo> checkBed(GetNotOptionalBedBo getNotOptionalBedBo);
 }

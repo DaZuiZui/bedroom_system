@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/bed")
@@ -59,5 +61,16 @@ public class BedController {
         }
         System.err.println(chooseBedBo);
         return bedService.chooseBed(chooseBedBo);
+    }
+
+    /**
+     * 查看
+     */
+    @ApiOperation("选择床位")
+    @PostMapping("/checkBed")
+    public String checkBed(@RequestBody GetNotOptionalBedBo getNotOptionalBedBo){
+        getNotOptionalBedBo.setBuilderName(URLDecoder.decode(getNotOptionalBedBo.getBuilderName()));
+        System.err.println(getNotOptionalBedBo);
+        return bedService.checkBed(getNotOptionalBedBo);
     }
 }

@@ -21,4 +21,6 @@ public interface BedService {
 
 
     public String chooseBed(ChooseBedBo chooseBedBo);
+
+    public String checkBed(@RequestBody GetNotOptionalBedBo getNotOptionalBedBo);
 }

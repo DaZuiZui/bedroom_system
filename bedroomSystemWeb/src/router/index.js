@@ -10,6 +10,7 @@ import UserBuilder from '@/components/view/user/UserBuilder'
 import UserChooseBed from '@/components/view/user/ChooseBed'
 import UserInfo from '@/components/view/user/MyInfo'
 import Help from '@/components/view/user/Help'
+import CheckRoom from '@/components/view/admin/CheckRoom'
 Vue.use(Router)
 
 export default new Router({
@@ -17,6 +18,11 @@ export default new Router({
   base: '/h',
 
   routes: [
+    {
+      path: '/user/CheckRoom',
+      name: 'CheckRoom',
+      component: CheckRoom
+    },
     {
       path: '/user/help',
       name: 'help',
