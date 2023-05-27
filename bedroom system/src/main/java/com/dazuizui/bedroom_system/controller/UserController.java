@@ -82,4 +82,10 @@ public class UserController {
 
         return userService.findById(token);
     }
+
+    @ApiOperation("修改学生status")
+    @PostMapping("/updateStatusByUsername")
+    public String updateStatusByUsername(@RequestParam("username")String username,@RequestParam("status")Integer status){
+        return userService.updateStatusByUsername(username,status);
+    }
 }

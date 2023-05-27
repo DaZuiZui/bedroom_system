@@ -32,4 +32,6 @@ public interface UserService {
     public String GetPaginationInfo(GetPaginationInfoBo getPaginationInfoBo);
 
     public String findById(String token);
+
+    public String updateStatusByUsername(String username,Integer status);
 }

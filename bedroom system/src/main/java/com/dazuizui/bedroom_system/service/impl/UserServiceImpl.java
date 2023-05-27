@@ -102,12 +102,22 @@ public class UserServiceImpl implements UserService {
         }
         String useridstr = (String) analysis.get("id");
         Long id = Long.valueOf(useridstr);
-        System.out.println("666");
+
         BedInfo bedInfoById = bedMapper.findBedInfoById(id);
         Integer bedId = bedInfoById.getBedId();
-        System.out.println(bedId);
+
         Bed byId = bedMapper.fd(Long.valueOf(bedId));
         System.out.println(byId);
         return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,byId,StatusCode.OK));
+    }
+
+    @Override
+    public String updateStatusByUsername(String username, Integer status) {
+        Long aLong = userMapper.updateStatusByUsername(username, status);
+        if (aLong == 0){
+            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.Error,null,StatusCode.Error));
+        }
+
+        return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,null,StatusCode.OK));
     }
 }
