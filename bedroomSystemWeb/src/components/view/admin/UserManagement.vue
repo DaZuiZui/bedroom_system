@@ -25,9 +25,28 @@
                 :file-list="fileList">
                 <el-button size="small" type="primary">点击上传用户信息</el-button>
                 <div slot="tip" class="el-upload__tip">只能上传excel文件</div>
-            </el-upload>
+            </el-upload> 
+
+            <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
+              缴费管理
+            </el-button>
             <br>   <br>    
             <br>   
+ 
+            
+            <el-drawer
+              title="我是标题"
+              :visible.sync="drawer"
+              direction="btt"
+              :with-header="false">
+              <div>
+                <el-input v-model="username" placeholder="请输入内容"></el-input>
+                <el-button-group>
+                  <el-button type="primary" icon="el-icon-check" @click="check(1)">缴费</el-button>
+                  <el-button type="primary" @click="check(0)">取消缴费<i class="el-icon-close"></i></el-button>
+                </el-button-group>
+              </div>
+            </el-drawer>
 
             <table class="table">
                 <thead class="thead-light">
@@ -121,7 +140,9 @@ import { Checkbox } from 'element-ui';
             start: 0,
             number: 50
         },
-
+        username: "",
+        
+        drawer: false,
         count: 0,
         list: [],
       }
@@ -132,6 +153,14 @@ import { Checkbox } from 'element-ui';
     },
 
     methods: {
+        async check(status){
+          let obj = await synRequestPost("/user/updateStatusByUsername?username="+this.username+"&status="+status); 
+          if(check(obj)){
+             alert("修改成功");
+          }
+        },
+
+
         async fileOK(response, file, fileList){
             alert("上传成功");
             this.getPaginationInfo(1);

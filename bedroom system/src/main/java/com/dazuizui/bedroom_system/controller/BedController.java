@@ -73,4 +73,11 @@ public class BedController {
         System.err.println(getNotOptionalBedBo);
         return bedService.checkBed(getNotOptionalBedBo);
     }
+
+    @ApiOperation("移除床选择")
+    @PostMapping("/removeBedInfo")
+    public  String removeBedInfo(@RequestParam("id")Long id){
+
+        return bedService.removeBedInfo(id);
+    }
 }

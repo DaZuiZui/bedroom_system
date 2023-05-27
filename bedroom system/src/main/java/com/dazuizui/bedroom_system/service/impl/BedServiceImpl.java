@@ -146,5 +146,37 @@ public class BedServiceImpl implements BedService {
         return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,bedInfos, StatusCode.OK));
     }
 
+    /**
+     * 选择床
+     * @param id
+     * @return
+     */
+    @Override
+    public String removeBedInfo(Long id) {
+        BedInfo bedInfoById1 = bedMapper.findBedInfoById1(id);
+        //更改床未选的状态
+        TransactionStatus begin = transactionUtils.begin(TransactionDefinition.ISOLATION_READ_COMMITTED);
 
+        try {
+            //清除床选择状态
+            Long numberOfOptions = bedMapper.updateStatusById(0, Long.valueOf(bedInfoById1.getBedId()));
+            if (numberOfOptions == 0){
+                transactionUtils.rollback(begin);
+                return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.Error,null, StatusCode.Error));
+            }
+            //清除角色选择状态
+            numberOfOptions = bedMapper.deleteBedInfoById(id);
+            if (numberOfOptions == 0){
+                transactionUtils.rollback(begin);
+                return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.Error,null, StatusCode.Error));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            transactionUtils.rollback(begin);
+            return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.Error,null, StatusCode.Error));
+        }
+
+        transactionUtils.commit(begin);
+        return JSONArray.toJSONString(new ResponseVo<>(StatusCodeMessage.OK,null, StatusCode.OK));
+    }
 }

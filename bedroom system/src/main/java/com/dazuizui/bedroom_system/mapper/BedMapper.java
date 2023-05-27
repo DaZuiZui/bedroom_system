@@ -33,6 +33,12 @@ public interface BedMapper {
     @Insert("insert into bedinfo value(null,#{roomId},#{builderName},#{bedId},#{userId},#{floor})")
     public Long insertBedInfo(ChooseBedBo chooseBedBo);
 
-    @Select("select *,(select name from user where id = user_id limit 1) as 'name' from bedinfo where builder_name = #{builderName} and floor_id = #{floor} and room_id = #{roomId} ")
+    @Select("select id,room_id,builder_name,user_id,floor_id,(select name from user where id = user_id limit 1) as 'name',(select bed_id from bed where id = t1.bed_id) as 'bed_id' from bedinfo t1 where builder_name = #{builderName} and floor_id = #{floor} and room_id = #{roomId} ")
     public List<BedInfo> checkBed(GetNotOptionalBedBo getNotOptionalBedBo);
+
+    @Select("select * from bedInfo where id = #{id}")
+    public BedInfo findBedInfoById1(@Param("id")Long id);
+
+    @Delete("delete from bedInfo where id = #{id}")
+    public Long deleteBedInfoById(@Param("id")Long id);
 }
