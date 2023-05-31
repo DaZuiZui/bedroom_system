@@ -20,7 +20,7 @@
 
           <div class="text-center" style="1000px" >
               <div>
-                    您目前选择为<b>{{getNotOptionalBedBo.floor}}楼-{{getNotOptionalBedBo.roomId}}号</b> <span style="color: red;">您只有一次选择寝室的机会，一旦点击选择无法撤回，（若您的确需要撤回您的选择，请联系您的负责老师）</span>
+                    您目前选择为<b>{{getNotOptionalBedBo.floor}}楼-{{getNotOptionalBedBo.roomId}}号</b> <span style="color: red;"></span>
               </div>
               <div class="row mb-5 justify-content-center text-center">
                 <div>
@@ -32,8 +32,8 @@
                           <span v-if="bedmap[2] == undefined" style="width: 50px;">
                                 此床位未选择 
                           </span>
-                          <span v-else>
-                            被{{bedmap[2].name}}选择
+                          <span style="color:blue" v-else>
+                            被{{bedmap[2].name}}选择 <el-link type="primary" @click="removeBedChoose(bedmap[2].id)" >移除</el-link>
                           </span>
                       </div>
                    </div>
@@ -48,13 +48,12 @@
                             <span v-if="bedmap[3] == undefined" style="width: 50px;">
                                   此床位未选择 
                             </span>
-                            <span v-else>
-                                  被{{bedmap[3].name}}选择
+                            <span v-else style="color:blue">
+                                  被{{bedmap[3].name}}选择<el-link type="primary" @click="removeBedChoose(bedmap[3].id)" >移除</el-link>
                             </span>
                         </div>
                    </div>
                 </div>
-
               </div>    
           
               &nbsp;
@@ -68,8 +67,8 @@
                           <span v-if="bedmap[1] == undefined" style="width: 50px;">
                                 此床位未选择 
                           </span>
-                          <span v-else>
-                            被{{bedmap[1].name}}选择
+                          <span style="color:blue" v-else>
+                            被{{bedmap[1].name}}选择<el-link type="primary" @click="removeBedChoose(bedmap[1].id)" >移除</el-link>
                           </span>
                       </div>
                    </div>
@@ -84,8 +83,8 @@
                             <span v-if="bedmap[4] == undefined" style="width: 50px;">
                                   此床位未选择 
                             </span>
-                            <span v-else>
-                                  被{{bedmap[4].name}}选择
+                            <span style="color:blue" v-else>
+                                  被{{bedmap[4].name}}选择<el-link type="primary" @click="removeBedChoose(bedmap[4].id)" >移除</el-link>
                             </span>
                         </div>
                    </div>
@@ -165,12 +164,21 @@ import { Checkbox } from 'element-ui';
         console.log(obj);
         if(check(obj)){
             for(let i = 0 ; i < obj.data.length ;i++){
-                this.$set(this.bedmap,(i+1),obj.data[i]);  
+                this.$set(this.bedmap,obj.data[i].bedId,obj.data[i]);  
             }
- 
         }
       },
 
+      /**
+       *  移除床位选择
+       */
+      async removeBedChoose(id){
+        let obj = await synRequestPost("/bed/removeBedInfo?id="+id);
+        if(check(obj)){
+          alert("移除成功");
+          window.location.href="/user/CheckRoom?builderName="+getQueryVariable("builderName")+"&floor="+getQueryVariable("floor")+"&roomId="+getQueryVariable("roomId");
+        }
+      },
 
       //选择床位
       async chooseTheBed(id){

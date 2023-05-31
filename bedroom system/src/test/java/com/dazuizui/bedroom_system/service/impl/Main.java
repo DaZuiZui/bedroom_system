@@ -1,18 +1,15 @@
-package com.dazuizui.bedroom_system;
+package com.dazuizui.bedroom_system.service.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class BedroomSystemApplicationTests {
 
-    @Test
-    void contextLoads() {
+public class Main {
+
+
+    public static void main(String[] args) {
         @Data
         @AllArgsConstructor
         class A {
@@ -34,5 +31,4 @@ class BedroomSystemApplicationTests {
         B parsed = JSON.parseObject(jsonStr, B.class);
         System.out.println("反序列化：\n" + parsed);
     }
-
 }

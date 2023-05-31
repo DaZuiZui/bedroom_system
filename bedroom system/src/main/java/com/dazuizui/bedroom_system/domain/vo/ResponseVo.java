@@ -4,7 +4,6 @@ package com.dazuizui.bedroom_system.domain.vo;
  * 后端返回给前端的数据封装题
  */
 public class ResponseVo<T> {
-
     private String message; //返回信息
     private T data;    //返回数据
     private String code;    //响应状态码
